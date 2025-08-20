@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no">
 <meta name="theme-color" content="#7c3aed" />
 <title>Undangan Nikah Virtual – [Perdana Putra Oei & Venesa Lim]</title>
 <meta name="description" content="Undangan pernikahan virtual Perdana Putra Oei & Venesa Lim – [25/10/2025]." />
@@ -158,7 +158,7 @@ footer{padding:40px 24px; text-align:center; color:#cbd5e1}
 
 /* toast */
 .toast{
-  position:fixed; left:50%; bottom:18px; transform:translateX(-50%) translateY(20px);
+  width:100%; left:50%; bottom:18px; transform:translateX(-50%) translateY(20px);
   background:linear-gradient(180deg,#2a2216,#1b160e);
   border:1px solid #3a2f1f; color:#fff; padding:10px 14px; border-radius:12px;
   opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50;
@@ -166,7 +166,7 @@ footer{padding:40px 24px; text-align:center; color:#cbd5e1}
 .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
 /* Tombol Musik */
 .music-btn{
-  position:fixed; bottom:20px; right:20px;
+  width:100%; bottom:20px; right:20px;
   background:linear-gradient(180deg,#2a2216,#1b160e);
   border:1px solid #3a2f1f;
   color:#fff; padding:10px 14px;
@@ -177,13 +177,81 @@ footer{padding:40px 24px; text-align:center; color:#cbd5e1}
   user-select:none;
 }
 .music-btn:hover{background:#3a2c16;}
+/* ====== MOBILE FIX & SAFE AREA ====== */
+
+/* Hindari overflow horizontal yang bikin tampilan seperti setengah */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Semua gambar fleksibel */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Container pakai safe-area (notch) */
+.container {
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+}
+
+/* Musik button aman dari notch & tidak bikin overflow */
+.music-btn{
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+/* Grid default: 1 kolom di mobile, lalu naik bertahap */
+.grid.cols-3,
+.grid.cols-2 {
+  grid-template-columns: 1fr;  /* mobile-first */
+  gap: 12px;
+}
+
+/* ≥480px: dua kolom untuk section 2 kolom */
+@media (min-width: 480px){
+  .grid.cols-2{
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+}
+
+/* ≥720px: tiga kolom untuk section 3 kolom */
+@media (min-width: 720px){
+  .grid.cols-3{
+    grid-template-columns: repeat(3, minmax(0,1fr));
+  }
+}
+
+/* Baris tombol – penuhi lebar di HP */
+.btn-row .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Kurangi padding agar konten lega di layar kecil */
+@media (max-width: 430px){
+  header.hero { padding: 44px 16px 24px; }
+  .section { padding: 18px; }
+  .title { font-size: clamp(28px, 8vw, 42px); }
+  .comment-card { padding: 16px; }
+}
+
+/* Toast posisinya aman & tidak mendorong layout */
+.toast{
+  left: 50%;
+  right: auto;
+  max-width: calc(100vw - 32px);
+  will-change: transform, opacity;
+}
 </style>
 </head>
 <body>
   <!-- Musik Latar -->
 <audio id="bgm" autoplay loop playsinline>
   <!-- ganti link mp3 sesuai pilihanmu -->
-  <source src="https://putraoei.github.io/wedding-of-utha-ganteng-with-venesa-lim/lagu/mejikuhibiniu.mp3" type="audio/mpeg">
+  <source src="lagu/mejikuhibiniu.mp3" type="audio/mpeg">
   Browser Anda tidak mendukung pemutar audio.
 </audio>
 
@@ -214,7 +282,7 @@ footer{padding:40px 24px; text-align:center; color:#cbd5e1}
 </div>
 
 
-<div class="grid cols-3" style="width:100%; max-width:900px; margin-top:10px">
+<div class="grid cols-3 btn-row" style="width:100%; max-width:900px; margin-top:10px">
 <a class="btn btn-primary" id="btnLive" href="#live" rel="noopener">▶️ &nbsp;Buka Live Streaming</a>
 <a class="btn btn-outline" id="btnCalendar" href="#" download>📅 &nbsp;Simpan ke Kalender</a>
 <button class="btn btn-outline" id="btnCopy" type="button">🔗 &nbsp;Salin Link Undangan</button>
@@ -582,7 +650,7 @@ window.location.href = `mailto:${config.contactEmail}?subject=${subject}&body=${
 function toast(msg){
 const t = document.createElement('div');
 t.textContent = msg;
-t.style.cssText = 'position:fixed; left:50%; transform:translateX(-50%); bottom:24px; background:rgba(15,15,25,.9); color:white; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); z-index:9999; box-shadow: var(--shadow)';
+t.style.cssText = 'width:100%; left:50%; transform:translateX(-50%); bottom:24px; background:rgba(15,15,25,.9); color:white; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); z-index:9999; box-shadow: var(--shadow)';
 document.body.appendChild(t);
 setTimeout(()=>{ t.remove(); }, 2000);
 }
