@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Undangan Pernikahan — Utha & Venesa</title>
+  <meta name="description" content="Undangan pernikahan Utha & Venesa. Mohon doa & kehadirannya. Tersedia peta lokasi pemberkatan dan resepsi.">
+  <meta name="theme-color" content="#6b4a14" />
+
+  <!-- Leaflet (peta) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <style>
+    :root{
+      --bg:#0f0d0a;
+      --card:#17130e;
+      --gold1:#f6e18a; --gold2:#bf8c1a; --gold3:#fff6c8;
+      --text:#f6f3ea; --muted:#c9c2b1;
+      --accent:#e0c977;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55}
+    a{color:var(--gold1);text-decoration:none}
+    .wrap{max-width:860px;margin:auto;padding:16px}
+    .hero{
+      background:
+        linear-gradient(180deg,#1d160c 0%,#120e09 100%),
+        radial-gradient(1200px 400px at 50% -10%,rgba(255,255,255,.07),rgba(0,0,0,0));
+      border-radius:24px; padding:28px; text-align:center; position:relative; overflow:hidden;
+      border:2px solid transparent;
+      background-clip: padding-box, border-box;
+      border-image: linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3)) 1;
+    }
+    .names{font-size:clamp(28px,6vw,44px); font-weight:700; letter-spacing:.5px}
+    .and{display:inline-block; margin:0 10px; opacity:.7}
+    .date{margin-top:6px; color:var(--muted)}
+    .card{background:var(--card); border-radius:18px; padding:18px; margin-top:14px; border:1px solid #272018}
+    .section-title{font-weight:700; font-size:18px; display:flex; align-items:center; gap:8px; margin-bottom:8px}
+    .grid{display:grid; gap:12px}
+    @media(min-width:720px){ .grid-2{grid-template-columns:1fr 1fr} }
+    .info p{margin:6px 0}
+    .btn{
+      display:inline-block; padding:12px 16px; border-radius:12px; font-weight:600; border:1px solid #3a2f1f;
+      background:linear-gradient(180deg,#2a2216,#1b160e); color:var(--text); cursor:pointer;
+      transition:transform .08s ease;
+    }
+    .btn:active{transform:scale(.98)}
+    .btn.gold{
+      border:2px solid transparent;
+      background:
+        linear-gradient(180deg,#3a2c12,#221b0d) padding-box,
+        linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3)) border-box;
+      color:#fff;
+    }
+    /* Map */
+    .map{height:320px; border-radius:14px; overflow:hidden; border:1px solid #3a2f1f}
+    @media(min-width:420px){ .map{height:360px} }
+    /* Comments */
+    .comment-form input,.comment-form textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid #3a2f1f; background:#12100b; color:var(--text)
+    }
+    .comment-form textarea{min-height:90px; resize:vertical}
+    .comment{padding:14px; border:1px solid #2d2317; border-radius:14px; background:#12100b}
+    .comment .meta{font-size:12px; color:var(--muted); margin-top:4px}
+    .empty{color:var(--muted); text-align:center; padding:16px}
+    .foot{text-align:center;color:var(--muted);font-size:13px;margin:28px 0 8px}
+    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#1a150e;border:1px solid #2d2317;color:var(--muted);font-size:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="pill">Undangan Pernikahan</div>
+      <div class="names">Utha<span class="and">&amp;</span>Venesa</div>
+      <div class="date">Sabtu, 14 Desember 2025 • Jakarta</div>
+    </section>
+
+    <!-- RUNDOWN -->
+    <section class="grid grid-2 card">
+      <div class="info">
+        <div class="section-title">🕊️ Pemberkatan</div>
+        <p><strong>Waktu:</strong> 09.00 WIB</p>
+        <p><strong>Tempat:</strong> Gereja Harmoni</p>
+        <p><strong>Alamat:</strong> Jl. Contoh Damai No. 12, Jakarta</p>
+      </div>
+      <div class="info">
+        <div class="section-title">🎉 Resepsi</div>
+        <p><strong>Waktu:</strong> 19.00 WIB</p>
+        <p><strong>Tempat:</strong> Grand Ballroom Harmoni</p>
+        <p><strong>Alamat:</strong> Jl. Contoh Raya No. 88, Jakarta</p>
+      </div>
+    </section>
+
+    <!-- PETA PEMBERKATAN -->
+    <section class="card">
+      <div class="section-title">🗺️ Peta Lokasi Pemberkatan</div>
+      <div id="mapPemberkatan" class="map" aria-label="Peta Pemberkatan"></div>
+      <p style="margin-top:10px">
+        <a id="gmPemberkatan" class="btn gold" target="_blank" rel="noopener">Buka di Google Maps</a>
+      </p>
+    </section>
+
+    <!-- PETA RESEPSI -->
+    <section class="card">
+      <div class="section-title">🗺️ Peta Lokasi Resepsi</div>
+      <div id="mapResepsi" class="map" aria-label="Peta Resepsi"></div>
+      <p style="margin-top:10px">
+        <a id="gmResepsi" class="btn gold" target="_blank" rel="noopener">Buka di Google Maps</a>
+      </p>
+    </section>
+
+    <!-- KOMENTAR -->
+    <section class="card" id="komentar">
+      <div class="section-title">💬 Titip Ucapan</div>
+      <form id="formKomentar" class="comment-form" autocomplete="on">
+        <div class="grid">
+          <input type="text" name="nama" placeholder="Nama lengkap" required maxlength="60" />
+          <input type="text" name="kontak" placeholder="No. WA / Instagram (opsional)" maxlength="80" />
+        </div>
+        <div style="margin-top:10px">
+          <textarea name="pesan" placeholder="Tulis ucapan atau doa terbaik..." required maxlength="500"></textarea>
+        </div>
+        <div style="margin-top:10px; display:flex; gap:8px; align-items:center; justify-content:space-between; flex-wrap:wrap">
+          <button class="btn gold" type="submit">Kirim Ucapan</button>
+          <button class="btn" type="button" id="clearBtn" title="Hanya menghapus komentar yang tersimpan di perangkat ini">Hapus Semua (perangkat ini)</button>
+        </div>
+      </form>
+
+      <div id="listKomentar" style="margin-top:14px" class="grid"></div>
+      <div id="emptyState" class="empty">Belum ada komentar. Jadilah yang pertama! ✨</div>
+    </section>
+
+    <p class="foot">Terima kasih atas doa & kehadirannya. Sampai jumpa di hari bahagia kami. 🤍</p>
+  </div>
+
+  <script>
+  // ================================
+  // KONFIGURASI LOKASI & TEKS (EDIT)
+  // ================================
+  // TODO: Ganti koordinat dan nama popup sesuai lokasi nyata.
+  const LOKASI = {
+    pemberkatan: {
+      lat: -6.175392, lng: 106.827153,          // Monas (contoh)
+      nama: "Gereja Harmoni",
+      alamat: "Jl. Contoh Damai No. 12, Jakarta",
+    },
+    resepsi: {
+      lat: -6.193125, lng: 106.820231,          // Bundaran HI (contoh)
+      nama: "Grand Ballroom Harmoni",
+      alamat: "Jl. Contoh Raya No. 88, Jakarta",
+    }
+  };
+
+  // ================================
+  // Inisialisasi Peta (Leaflet + OSM)
+  // ================================
+  function buatPeta({elId, lat, lng, title, alamat}) {
+    const map = L.map(elId,{scrollWheelZoom:false}).setView([lat,lng], 16);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+      attribution:'&copy; OpenStreetMap',
+      maxZoom:19
+    }).addTo(map);
+    const marker = L.marker([lat,lng]).addTo(map);
+    marker.bindPopup(`<strong>${escapeHtml(title)}</strong><br>${escapeHtml(alamat)}`).openPopup();
+    return map;
+  }
+  function updateBtnGoogleMaps(anchorEl, lat, lng, label){
+    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=&travelmode=driving`;
+    anchorEl.href = url;
+    anchorEl.setAttribute('aria-label', `Buka ${label} di Google Maps`);
+  }
+
+  // ================================
+  // Komentar (localStorage)
+  // ================================
+  const STORAGE_KEY = "undangan:komentar:v1";
+  const listEl = document.getElementById('listKomentar');
+  const emptyEl = document.getElementById('emptyState');
+  const clearBtn = document.getElementById('clearBtn');
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  }
+  function loadKomentar(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch{ return [] }
+  }
+  function saveKomentar(arr){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+  }
+  function waktuIndo(ts){
+    const d = new Date(ts);
+    return d.toLocaleString('id-ID',{dateStyle:'medium', timeStyle:'short'});
+  }
+  function renderKomentar(){
+    const data = loadKomentar().sort((a,b)=>b.ts-a.ts);
+    listEl.innerHTML = "";
+    if(!data.length){ emptyEl.style.display='block'; return }
+    emptyEl.style.display='none';
+    for(const item of data){
+      const card = document.createElement('div');
+      card.className = 'comment';
+      card.innerHTML = `
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div style="width:40px;height:40px;border-radius:12px;background:#1b160e;border:1px solid #2d2317;display:flex;align-items:center;justify-content:center;font-weight:700">
+            ${escapeHtml((item.nama||'?').trim().slice(0,1).toUpperCase())}
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="font-weight:700">${escapeHtml(item.nama||'Tamu')}</div>
+            ${item.kontak ? `<div class="meta">${escapeHtml(item.kontak)}</div>` : ``}
+            <div style="margin-top:6px">${escapeHtml(item.pesan)}</div>
+            <div class="meta">${waktuIndo(item.ts)}</div>
+          </div>
+        </div>`;
+      listEl.appendChild(card);
+    }
+  }
+
+  document.getElementById('formKomentar').addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const nama = (fd.get('nama')||'').toString().trim();
+    const kontak = (fd.get('kontak')||'').toString().trim();
+    const pesan = (fd.get('pesan')||'').toString().trim();
+    if(!nama || !pesan){ alert('Nama dan pesan wajib diisi.'); return }
+    if(pesan.length > 500){ alert('Pesan maksimal 500 karakter.'); return }
+
+    const data = loadKomentar();
+    data.push({ id: Date.now().toString(36), ts: Date.now(), nama, kontak, pesan });
+    saveKomentar(data);
+    e.target.reset();
+    renderKomentar();
+    // Scroll ke komentar teratas
+    document.getElementById('komentar').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  clearBtn.addEventListener('click',()=>{
+    if(confirm('Hapus semua komentar yang tersimpan di perangkat ini?')) {
+      localStorage.removeItem(STORAGE_KEY);
+      renderKomentar();
+    }
+  });
+
+  // ================================
+  // START
+  // ================================
+  window.addEventListener('load', ()=>{
+    // Peta Pemberkatan
+    buatPeta({
+      elId:'mapPemberkatan',
+      lat: LOKASI.pemberkatan.lat,
+      lng: LOKASI.pemberkatan.lng,
+      title: LOKASI.pemberkatan.nama,
+      alamat: LOKASI.pemberkatan.alamat
+    });
+    updateBtnGoogleMaps(
+      document.getElementById('gmPemberkatan'),
+      LOKASI.pemberkatan.lat, LOKASI.pemberkatan.lng, 'Pemberkatan'
+    );
+
+    // Peta Resepsi
+    buatPeta({
+      elId:'mapResepsi',
+      lat: LOKASI.resepsi.lat,
+      lng: LOKASI.resepsi.lng,
+      title: LOKASI.resepsi.nama,
+      alamat: LOKASI.resepsi.alamat
+    });
+    updateBtnGoogleMaps(
+      document.getElementById('gmResepsi'),
+      LOKASI.resepsi.lat, LOKASI.resepsi.lng, 'Resepsi'
+    );
+
+    // Komentar
+    renderKomentar();
+  });
+  </script>
+</body>
+</html>
