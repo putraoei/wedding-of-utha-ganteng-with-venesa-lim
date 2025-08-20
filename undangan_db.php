@@ -1,9 +1,0 @@
-CREATE TABLE rsvp (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nama VARCHAR(100) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    wa VARCHAR(20),
-    status VARCHAR(20),
-    pesan TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
