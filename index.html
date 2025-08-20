@@ -1,283 +1,640 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>Undangan Pernikahan — Utha & Venesa</title>
-  <meta name="description" content="Undangan pernikahan Utha & Venesa. Mohon doa & kehadirannya. Tersedia peta lokasi pemberkatan dan resepsi.">
-  <meta name="theme-color" content="#6b4a14" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#7c3aed" />
+<title>Undangan Nikah Virtual – [Perdana Putra Oei & Venesa Lim]</title>
+<meta name="description" content="Undangan pernikahan virtual Perdana Putra Oei & Venesa Lim – [25/10/2025]." />
+<meta property="og:title" content="Undangan Nikah Virtual – Perdana Putra Oei & Venesa Lim" />
+<meta property="og:description" content="Yuk hadir secara virtual di acara kami pada [25/10/2025]." />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="" />
+<meta property="og:url" content="" />
+<!-- Google Fonts (bebas ganti) -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Leaflet (peta) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-  <style>
-    :root{
-      --bg:#0f0d0a;
-      --card:#17130e;
-      --gold1:#f6e18a; --gold2:#bf8c1a; --gold3:#fff6c8;
-      --text:#f6f3ea; --muted:#c9c2b1;
-      --accent:#e0c977;
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55}
-    a{color:var(--gold1);text-decoration:none}
-    .wrap{max-width:860px;margin:auto;padding:16px}
-    .hero{
-      background:
-        linear-gradient(180deg,#1d160c 0%,#120e09 100%),
-        radial-gradient(1200px 400px at 50% -10%,rgba(255,255,255,.07),rgba(0,0,0,0));
-      border-radius:24px; padding:28px; text-align:center; position:relative; overflow:hidden;
-      border:2px solid transparent;
-      background-clip: padding-box, border-box;
-      border-image: linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3)) 1;
-    }
-    .names{font-size:clamp(28px,6vw,44px); font-weight:700; letter-spacing:.5px}
-    .and{display:inline-block; margin:0 10px; opacity:.7}
-    .date{margin-top:6px; color:var(--muted)}
-    .card{background:var(--card); border-radius:18px; padding:18px; margin-top:14px; border:1px solid #272018}
-    .section-title{font-weight:700; font-size:18px; display:flex; align-items:center; gap:8px; margin-bottom:8px}
-    .grid{display:grid; gap:12px}
-    @media(min-width:720px){ .grid-2{grid-template-columns:1fr 1fr} }
-    .info p{margin:6px 0}
-    .btn{
-      display:inline-block; padding:12px 16px; border-radius:12px; font-weight:600; border:1px solid #3a2f1f;
-      background:linear-gradient(180deg,#2a2216,#1b160e); color:var(--text); cursor:pointer;
-      transition:transform .08s ease;
-    }
-    .btn:active{transform:scale(.98)}
-    .btn.gold{
-      border:2px solid transparent;
-      background:
-        linear-gradient(180deg,#3a2c12,#221b0d) padding-box,
-        linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3)) border-box;
-      color:#fff;
-    }
-    /* Map */
-    .map{height:320px; border-radius:14px; overflow:hidden; border:1px solid #3a2f1f}
-    @media(min-width:420px){ .map{height:360px} }
-    /* Comments */
-    .comment-form input,.comment-form textarea{
-      width:100%; padding:12px 14px; border-radius:12px; border:1px solid #3a2f1f; background:#12100b; color:var(--text)
-    }
-    .comment-form textarea{min-height:90px; resize:vertical}
-    .comment{padding:14px; border:1px solid #2d2317; border-radius:14px; background:#12100b}
-    .comment .meta{font-size:12px; color:var(--muted); margin-top:4px}
-    .empty{color:var(--muted); text-align:center; padding:16px}
-    .foot{text-align:center;color:var(--muted);font-size:13px;margin:28px 0 8px}
-    .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;background:#1a150e;border:1px solid #2d2317;color:var(--muted);font-size:12px}
-  </style>
+<style>
+:root{
+--bg: #0f1020; /* Warna dasar background */
+--card: #16172b; /* Warna kartu */
+--muted: #a1a6b4; /* Teks sekunder */
+--text: #f6f7fb; /* Teks utama */
+--brand: #7c3aed; /* Ungu elegan */
+--brand-2: #22d3ee; /* Aksen */
+--success: #10b981; /* Hijau */
+--warning: #f59e0b; /* Kuning */
+--danger: #ef4444; /* Merah */
+--radius: 18px; /* Lengkung kartu */
+--shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+margin:0; background: radial-gradient(1200px 600px at 80% -10%, rgba(124,58,237,.25), transparent),
+radial-gradient(800px 500px at 10% 120%, rgba(34,211,238,.2), transparent),
+var(--bg);
+color:var(--text);
+font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+line-height:1.55;
+}
+.container{max-width:1100px; margin:0 auto; padding:24px}
+header.hero{
+display:grid; gap:22px; align-items:center; justify-items:center; text-align:center;
+padding:64px 24px 32px;
+}
+.badge{display:inline-block; padding:6px 12px; border-radius:999px; background:rgba(124,58,237,.15); color:#c4b5fd; border:1px solid rgba(124,58,237,.35); font-weight:600; letter-spacing:.4px}
+.title{font-family:"Playfair Display", serif; font-weight:700; font-size:clamp(36px, 6vw, 64px); margin:6px 0}
+.and{font-size:.8em; color:#cbd5e1; font-weight:500; letter-spacing:.2em}
+.sub{color:var(--muted)}
+.card{background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02)); border:1px solid rgba(255,255,255,.08); box-shadow:var(--shadow); border-radius:var(--radius); backdrop-filter: blur(8px)}
+.grid{display:grid; gap:18px}
+.grid.cols-3{grid-template-columns: repeat(auto-fit, minmax(240px,1fr))}
+.grid.cols-2{grid-template-columns: repeat(auto-fit, minmax(280px,1fr))}
+.section{padding:30px}
+.muted{color:var(--muted)}
+.btn{appearance:none; border:none; cursor:pointer; padding:14px 18px; border-radius:14px; font-weight:700; letter-spacing:.3px; transition:.2s transform ease, .2s box-shadow ease; display:inline-flex; align-items:center; gap:10px}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:linear-gradient(135deg, var(--brand), #6d28d9); color:white; box-shadow:0 10px 18px rgba(124,58,237,.35)}
+.btn-outline{background:transparent; color:#e9d5ff; border:1px solid rgba(233,213,255,.35)}
+.pill{padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.08); background:rgba(255,255,255,.04); display:inline-flex; align-items:center; gap:10px}
+.countdown{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+.countdown .box{min-width:86px; text-align:center; padding:14px 10px; border-radius:14px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08)}
+.h2{font-family:"Playfair Display", serif; font-size:clamp(24px, 3.4vw, 36px); margin:0 0 8px}
+.mono{font-variant-numeric: tabular-nums; font-feature-settings: "tnum" on, "lnum" on}
+.list{list-style:none; padding:0; margin:0; display:grid; gap:10px}
+.list li{display:flex; gap:12px; align-items:flex-start}
+.list .dot{width:8px; height:8px; background:var(--brand-2); border-radius:999px; margin-top:10px}
+footer{padding:40px 24px; text-align:center; color:#cbd5e1}
+.divider{height:1px; background:linear-gradient(90deg, transparent, rgba(255,255,255,.12), transparent); margin:24px 0}
+.gallery{display:grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap:10px}
+.gallery img{width:100%; height:220px; object-fit:cover; border-radius:14px; border:1px solid rgba(255,255,255,.08)}
+/* Responsif kecil */
+@media (max-width:480px){
+.section{padding:22px}
+.countdown .box{min-width:72px}
+}
+/* ====== KOMENTAR: gaya seperti screenshot ====== */
+.comment-card{padding:20px}
+.comment-head{margin-bottom:10px}
+.comment-title{font-size:clamp(22px,4.4vw,32px);margin:0 0 6px 0}
+.comment-sub{color:var(--muted);margin:0}
+
+.comment-form.pretty .fg{
+  display:block;
+}
+.fg-label{
+  display:block; margin-bottom:8px; font-weight:700; color:#e8e3d4;
+}
+.comment-form.pretty input,
+.comment-form.pretty textarea{
+  width:100%;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid #2b2318;
+  background:linear-gradient(180deg,#14100b,#0f0c08);
+  color:var(--text);
+  outline:none;
+  transition:border .15s, box-shadow .15s, background .15s;
+}
+.comment-form.pretty input:focus,
+.comment-form.pretty textarea:focus{
+  border-color:#8f6a28;
+  box-shadow:0 0 0 3px rgba(239,205,120,.15);
+}
+.comment-form.pretty textarea{
+  min-height:120px; resize:vertical;
+}
+.fg-hint{
+  display:flex; justify-content:flex-end;
+  font-size:12px; color:var(--muted); margin-top:6px;
+}
+
+/* grid tiga kolom -> responsive */
+.form-grid-3{display:grid; gap:12px}
+@media(min-width:920px){ .form-grid-3{grid-template-columns:1fr 1fr 1fr} }
+
+.form-actions{
+  margin-top:14px;
+  display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+}
+.btn.with-icon{display:inline-flex; align-items:center; gap:10px}
+.btn.ghost{
+  background:linear-gradient(180deg,#201910,#17120c);
+  border:1px solid #2b2318;
+  color:#d6d0c2;
+}
+.btn.ghost:active{transform:scale(.98)}
+
+/* garis pembatas */
+.divider{
+  height:1px; background:linear-gradient(90deg,transparent,#2b2318,transparent);
+  margin:18px 0;
+}
+
+/* daftar komentar */
+.comment-list{display:grid; gap:10px}
+.comment-item{
+  display:flex; gap:12px; align-items:flex-start;
+  padding:12px; border-radius:14px;
+  background:linear-gradient(180deg,#15100b,#0e0b07);
+  border:1px solid #2d2317;
+}
+.cm-avatar{
+  width:46px; height:46px; flex:0 0 46px;
+  border-radius:12px;
+  background:
+    linear-gradient(180deg,#2a2216,#1b160e) padding-box,
+    linear-gradient(135deg,var(--gold1),var(--gold2),var(--gold3)) border-box;
+  border:2px solid transparent;
+  display:flex; align-items:center; justify-content:center;
+  font-weight:800; color:#fff;
+}
+.cm-body{flex:1; min-width:0}
+.cm-name{font-weight:800}
+.cm-meta{font-size:12px; color:var(--muted); margin-top:2px}
+.cm-text{margin-top:8px}
+
+/* toast */
+.toast{
+  position:fixed; left:50%; bottom:18px; transform:translateX(-50%) translateY(20px);
+  background:linear-gradient(180deg,#2a2216,#1b160e);
+  border:1px solid #3a2f1f; color:#fff; padding:10px 14px; border-radius:12px;
+  opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50;
+}
+.toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+/* Tombol Musik */
+.music-btn{
+  position:fixed; bottom:20px; right:20px;
+  background:linear-gradient(180deg,#2a2216,#1b160e);
+  border:1px solid #3a2f1f;
+  color:#fff; padding:10px 14px;
+  border-radius:12px;
+  font-size:14px;
+  cursor:pointer;
+  z-index:100;
+  user-select:none;
+}
+.music-btn:hover{background:#3a2c16;}
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <!-- HERO -->
-    <section class="hero">
-      <div class="pill">Undangan Pernikahan</div>
-      <div class="names">Utha<span class="and">&amp;</span>Venesa</div>
-      <div class="date">Sabtu, 14 Desember 2025 • Jakarta</div>
-    </section>
+  <!-- Musik Latar -->
+<audio id="bgm" autoplay loop playsinline>
+  <!-- ganti link mp3 sesuai pilihanmu -->
+  <source src="https://putraoei.github.io/wedding-of-utha-ganteng-with-venesa-lim/lagu/mejikuhibiniu.mp3" type="audio/mpeg">
+  Browser Anda tidak mendukung pemutar audio.
+</audio>
 
-    <!-- RUNDOWN -->
-    <section class="grid grid-2 card">
-      <div class="info">
-        <div class="section-title">🕊️ Pemberkatan</div>
-        <p><strong>Waktu:</strong> 09.00 WIB</p>
-        <p><strong>Tempat:</strong> Gereja Harmoni</p>
-        <p><strong>Alamat:</strong> Jl. Contoh Damai No. 12, Jakarta</p>
-      </div>
-      <div class="info">
-        <div class="section-title">🎉 Resepsi</div>
-        <p><strong>Waktu:</strong> 19.00 WIB</p>
-        <p><strong>Tempat:</strong> Grand Ballroom Harmoni</p>
-        <p><strong>Alamat:</strong> Jl. Contoh Raya No. 88, Jakarta</p>
-      </div>
-    </section>
+<!-- Kontrol tombol musik -->
+<div id="musicControl" class="music-btn">
+  🎵 Musik: <span id="musicStatus">On</span>
+</div>
 
-    <!-- PETA PEMBERKATAN -->
-    <section class="card">
-      <div class="section-title">🗺️ Peta Lokasi Pemberkatan</div>
-      <div id="mapPemberkatan" class="map" aria-label="Peta Pemberkatan"></div>
-      <p style="margin-top:10px">
-        <a id="gmPemberkatan" class="btn gold" target="_blank" rel="noopener">Buka di Google Maps</a>
-      </p>
-    </section>
+<!-- ===== HERO ===== -->
+<header class="hero container">
+<span class="badge">Undangan Pernikahan Virtual</span>
+<h1 class="title">[Perdana Putra Oei] <span class="and">&</span> [Venesa Lim]</h1>
+<p class="sub">Dengan penuh syukur, kami mengundang Anda untuk hadir secara virtual pada momen pernikahan kami.</p>
 
-    <!-- PETA RESEPSI -->
-    <section class="card">
-      <div class="section-title">🗺️ Peta Lokasi Resepsi</div>
-      <div id="mapResepsi" class="map" aria-label="Peta Resepsi"></div>
-      <p style="margin-top:10px">
-        <a id="gmResepsi" class="btn gold" target="_blank" rel="noopener">Buka di Google Maps</a>
-      </p>
-    </section>
 
-    <!-- KOMENTAR -->
-    <section class="card" id="komentar">
-      <div class="section-title">💬 Titip Ucapan</div>
-      <form id="formKomentar" class="comment-form" autocomplete="on">
-        <div class="grid">
-          <input type="text" name="nama" placeholder="Nama lengkap" required maxlength="60" />
-          <input type="text" name="kontak" placeholder="No. WA / Instagram (opsional)" maxlength="80" />
-        </div>
-        <div style="margin-top:10px">
-          <textarea name="pesan" placeholder="Tulis ucapan atau doa terbaik..." required maxlength="500"></textarea>
-        </div>
-        <div style="margin-top:10px; display:flex; gap:8px; align-items:center; justify-content:space-between; flex-wrap:wrap">
-          <button class="btn gold" type="submit">Kirim Ucapan</button>
-          <button class="btn" type="button" id="clearBtn" title="Hanya menghapus komentar yang tersimpan di perangkat ini">Hapus Semua (perangkat ini)</button>
-        </div>
-      </form>
+<div class="pill" role="group" aria-label="Waktu Acara">
+<div>🗓️ <strong id="dateText">Sabtu, 25 Oktober 2025</strong></div>
+<div>•</div>
+<div>⏰ <strong id="timeText">10:00 WIB (UTC+7)</strong></div>
+</div>
 
-      <div id="listKomentar" style="margin-top:14px" class="grid"></div>
-      <div id="emptyState" class="empty">Belum ada komentar. Jadilah yang pertama! ✨</div>
-    </section>
 
-    <p class="foot">Terima kasih atas doa & kehadirannya. Sampai jumpa di hari bahagia kami. 🤍</p>
+<div class="countdown" id="countdown" aria-live="polite">
+<div class="box"><div class="mono" id="d">00</div><small>Hari</small></div>
+<div class="box"><div class="mono" id="h">00</div><small>Jam</small></div>
+<div class="box"><div class="mono" id="m">00</div><small>Menit</small></div>
+<div class="box"><div class="mono" id="s">00</div><small>Detik</small></div>
+</div>
+
+
+<div class="grid cols-3" style="width:100%; max-width:900px; margin-top:10px">
+<a class="btn btn-primary" id="btnLive" href="#live" rel="noopener">▶️ &nbsp;Buka Live Streaming</a>
+<a class="btn btn-outline" id="btnCalendar" href="#" download>📅 &nbsp;Simpan ke Kalender</a>
+<button class="btn btn-outline" id="btnCopy" type="button">🔗 &nbsp;Salin Link Undangan</button>
+</div>
+</header>
+
+
+<main class="container" id="content">
+    <!-- ===== DETAIL ACARA ===== -->
+<section class="card section" id="acara">
+<h2 class="h2">Detail Acara</h2>
+<p class="muted">Acara akan disiarkan langsung secara online. Silakan bergabung melalui tautan di bawah ini. Mohon hadir 10 menit sebelum acara dimulai.</p>
+<div class="divider"></div>
+<div class="grid cols-2">
+<div>
+<h3>Akad / Pemberkatan</h3>
+<ul class="list">
+<li><span class="dot"></span><span>Tanggal: <strong id="dateDetail">Sabtu, 25 Oktober 2025</strong></span></li>
+<li><span class="dot"></span><span>Waktu: <strong id="timeDetail">10:00 – 11:00 WIB</strong></span></li>
+<li><span class="dot"></span><span>Platform: <strong id="platform">YouTube Live</strong></span></li>
+</ul>
+</div>
+<div>
+<h3>Resepsi Virtual</h3>
+<ul class="list">
+<li><span class="dot"></span><span>Tanggal: <strong id="dateDetail2">Sabtu, 25 Oktober 2025</strong></span></li>
+<li><span class="dot"></span><span>Waktu: <strong id="timeDetail2">19:00 – 20:00 WIB</strong></span></li>
+<li><span class="dot"></span><span>Dresscode: <strong>Smart Casual</strong></span></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<!-- ===== LIVE STREAM ===== -->
+<section class="card section" id="live">
+<h2 class="h2">Tautan Live Streaming</h2>
+<p class="muted">Klik tombol di bawah untuk bergabung. Jika diminta, masukkan passcode yang tertera.</p>
+<div class="grid cols-3">
+<!-- Ganti href dengan link YouTube/Zoom/Meet Anda -->
+<a class="btn btn-primary" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank" rel="noopener" id="liveMain">▶️ Tonton Live</a>
+<a class="btn btn-outline" href="https://chat.whatsapp.com/" target="_blank" rel="noopener">💬 Grup WhatsApp</a>
+<a class="btn btn-outline" href="https://calendar.google.com" target="_blank" rel="noopener">🗓️ Google Calendar</a>
+</div>
+<div class="pill" style="margin-top:14px">Passcode: <strong id="passcode">NIKAH2025</strong></div>
+</section>
+<!-- ===== RSVP ===== -->
+  <!-- === KOMENTAR / UCAPAN (baru) === -->
+<section class="card comment-card" id="komentar">
+  <div class="comment-head">
+    <h3 class="comment-title">Konfirmasi Kehadiran (RSVP) / Titip Ucapan</h3>
+    <p class="comment-sub">Isi formulir singkat ini. Setelah klik "Kirim", ucapan akan tampil langsung.</p>
   </div>
 
-  <script>
-  // ================================
-  // KONFIGURASI LOKASI & TEKS (EDIT)
-  // ================================
-  // TODO: Ganti koordinat dan nama popup sesuai lokasi nyata.
-  const LOKASI = {
-    pemberkatan: {
-      lat: -6.175392, lng: 106.827153,          // Monas (contoh)
-      nama: "Gereja Harmoni",
-      alamat: "Jl. Contoh Damai No. 12, Jakarta",
-    },
-    resepsi: {
-      lat: -6.193125, lng: 106.820231,          // Bundaran HI (contoh)
-      nama: "Grand Ballroom Harmoni",
-      alamat: "Jl. Contoh Raya No. 88, Jakarta",
-    }
-  };
+  <form id="formKomentar" class="comment-form pretty" autocomplete="on">
+    <div class="form-grid-3">
+      <label class="fg">
+        <span class="fg-label">Nama Lengkap</span>
+        <input type="text" name="nama" placeholder="Nama lengkap" required maxlength="60" />
+      </label>
 
-  // ================================
-  // Inisialisasi Peta (Leaflet + OSM)
-  // ================================
-  function buatPeta({elId, lat, lng, title, alamat}) {
-    const map = L.map(elId,{scrollWheelZoom:false}).setView([lat,lng], 16);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
-      attribution:'&copy; OpenStreetMap',
-      maxZoom:19
-    }).addTo(map);
-    const marker = L.marker([lat,lng]).addTo(map);
-    marker.bindPopup(`<strong>${escapeHtml(title)}</strong><br>${escapeHtml(alamat)}`).openPopup();
-    return map;
-  }
-  function updateBtnGoogleMaps(anchorEl, lat, lng, label){
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&destination_place_id=&travelmode=driving`;
-    anchorEl.href = url;
-    anchorEl.setAttribute('aria-label', `Buka ${label} di Google Maps`);
-  }
+      <label class="fg">
+        <span class="fg-label">Alamat Email (opsional)</span>
+        <input type="email" name="email" placeholder="nama@email.com" maxlength="80" />
+      </label>
 
-  // ================================
-  // Komentar (localStorage)
-  // ================================
-  const STORAGE_KEY = "undangan:komentar:v1";
-  const listEl = document.getElementById('listKomentar');
-  const emptyEl = document.getElementById('emptyState');
+      <label class="fg">
+        <span class="fg-label">No. WhatsApp (opsional)</span>
+        <input type="text" name="wa" placeholder="0812xxxxxxx" maxlength="30" />
+      </label>
+    </div>
+
+    <label class="fg" style="margin-top:10px">
+      <span class="fg-label">Ucapan &amp; Doa</span>
+      <textarea name="pesan" id="pesan" placeholder="Tulis ucapan terbaik..." required maxlength="500"></textarea>
+      <div class="fg-hint"><span id="charLeft">500</span> karakter tersisa</div>
+    </label>
+
+    <div class="form-actions">
+      <button class="btn gold with-icon" type="submit">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+        Kirim Ucapan
+      </button>
+      <button class="btn ghost with-icon" type="button" id="clearBtn" title="Hapus komentar yang tersimpan di perangkat ini">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M6 19a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+        Reset
+      </button>
+    </div>
+  </form>
+
+  <div class="divider"></div>
+
+  <div id="listKomentar" class="comment-list"></div>
+  <div id="emptyState" class="empty">Belum ada komentar. Jadilah yang pertama! ✨</div>
+
+  <!-- Toast sukses -->
+  <div id="toast" class="toast" role="status" aria-live="polite">Ucapan terkirim 🎉</div>
+</section>
+
+<script>
+/* ====== Komentar (localStorage) – versi UI baru ====== */
+const STORAGE_KEY = "undangan:komentar:v1";
+const listEl  = document.getElementById('listKomentar');
+const emptyEl = document.getElementById('emptyState');
+const toastEl = document.getElementById('toast');
+const charLeftEl = document.getElementById('charLeft');
+const pesanEl = document.getElementById('pesan');
+const clearBtn = document.getElementById('clearBtn');
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+}
+function loadKomentar(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]'); }catch{ return [] } }
+function saveKomentar(arr){ localStorage.setItem(STORAGE_KEY, JSON.stringify(arr)); }
+function waktuIndo(ts){ const d=new Date(ts); return d.toLocaleString('id-ID',{dateStyle:'medium', timeStyle:'short'}); }
+
+function showToast(msg='Ucapan terkirim 🎉'){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  setTimeout(()=> toastEl.classList.remove('show'), 1700);
+}
+
+function renderKomentar(){
+  const data = loadKomentar().sort((a,b)=>b.ts-a.ts);
+  listEl.innerHTML = "";
+  if(!data.length){ emptyEl.style.display='block'; return }
+  emptyEl.style.display='none';
+
+  for(const it of data){
+    const row = document.createElement('div');
+    row.className = 'comment-item';
+    row.innerHTML = `
+      <div class="cm-avatar">${escapeHtml((it.nama||'?').trim().slice(0,1).toUpperCase())}</div>
+      <div class="cm-body">
+        <div class="cm-name">${escapeHtml(it.nama||'Tamu')}</div>
+        ${it.kontak ? `<div class="cm-meta">${escapeHtml(it.kontak)}</div>` : ``}
+        <div class="cm-text">${escapeHtml(it.pesan)}</div>
+        <div class="cm-meta">${waktuIndo(it.ts)}</div>
+      </div>
+    `;
+    listEl.appendChild(row);
+  }
+}
+
+// counter karakter textarea
+if(pesanEl && charLeftEl){
+  const max = Number(pesanEl.getAttribute('maxlength')||500);
+  function updateCount(){
+    const left = Math.max(0, max - pesanEl.value.length);
+    charLeftEl.textContent = left;
+  }
+  pesanEl.addEventListener('input', updateCount);
+  updateCount();
+}
+
+document.getElementById('formKomentar').addEventListener('submit', (e)=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const nama = (fd.get('nama')||'').toString().trim();
+  const email = (fd.get('email')||'').toString().trim();
+  const wa    = (fd.get('wa')||'').toString().trim();
+  const pesan = (fd.get('pesan')||'').toString().trim();
+
+  if(!nama || !pesan){ alert('Nama dan ucapan wajib diisi.'); return }
+  if(pesan.length > 500){ alert('Pesan maksimal 500 karakter.'); return }
+
+  // gabungkan kontak (kompatibel dengan struktur lama)
+  const joiner = email && wa ? ' • ' : '';
+  const kontak = `${email}${joiner}${wa}`;
+
+  const data = loadKomentar();
+  data.push({ id: Date.now().toString(36), ts: Date.now(), nama, kontak, pesan });
+  saveKomentar(data);
+
+  e.target.reset();
+  renderKomentar();
+  showToast();
+});
+
+clearBtn.addEventListener('click', ()=>{
+  if(confirm('Hapus semua komentar yang tersimpan di perangkat ini?')){
+    localStorage.removeItem(STORAGE_KEY);
+    renderKomentar();
+    showToast('Komentar di perangkat ini sudah dihapus');
+  }
+});
+
+// initial render
+renderKomentar();
+</script>
+
+
+<!-- ===== REKENING/HADIAH ===== -->
+<section class="card section" id="gift">
+<h2 class="h2">Kado & Tanda Kasih</h2>
+<p class="muted">Doa restu Anda adalah hadiah terbaik. Jika ingin mengirim kado digital, berikut detail rekening/e-wallet:</p>
+<div class="grid cols-3">
+<div class="card section">
+<strong>BCA</strong>
+<div class="muted">No: <span id="rek1">1234567890</span> a.n. [Nama]</div>
+<button class="btn btn-outline" data-copy="#rek1">Salin Nomor</button>
+</div>
+<div class="card section">
+<strong>Gopay</strong>
+<div class="muted">No: <span id="rek2">081234567890</span> a.n. [Nama]</div>
+<button class="btn btn-outline" data-copy="#rek2">Salin Nomor</button>
+</div>
+<div class="card section">
+<strong>DANA</strong>
+<div class="muted">No: <span id="rek3">081234567891</span> a.n. [Nama]</div>
+<button class="btn btn-outline" data-copy="#rek3">Salin Nomor</button>
+</div>
+</div>
+</section>
+<!-- ===== GALERI (opsional) ===== -->
+<section class="card section" id="gallery">
+<h2 class="h2">Galeri</h2>
+<div class="gallery">
+<!-- Ganti src dengan foto Anda -->
+<img src="https://images.unsplash.com/photo-1460364157752-926555421a7e?q=80&w=1200&auto=format&fit=crop" alt="Foto prewedding 1" />
+<img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?q=80&w=1200&auto=format&fit=crop" alt="Foto prewedding 2" />
+<img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1200&auto=format&fit=crop" alt="Foto prewedding 3" />
+<img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=1200&auto=format&fit=crop" alt="Foto prewedding 4" />
+</div>
+</section>
+
+
+<!-- ===== FAQ singkat ===== -->
+<section class="card section" id="faq">
+<h2 class="h2">Pertanyaan Umum</h2>
+<ul class="list">
+<li><span class="dot"></span><span><strong>Bagaimana cara menghadiri?</strong><br><span class="muted">Klik tombol "Tonton Live" di bagian Tautan Live Streaming.</span></span></li>
+<li><span class="dot"></span><span><strong>Apakah ada passcode?</strong><br><span class="muted">Jika platform meminta, gunakan passcode yang tertera.</span></span></li>
+<li><span class="dot"></span><span><strong>Bagaimana mengirim kado?</strong><br><span class="muted">Gunakan nomor pada bagian "Kado & Tanda Kasih" atau hubungi panitia.</span></span></li>
+</ul>
+</section>
+</main>
+
+
+<footer>
+<div class="divider"></div>
+<div>Dengan cinta, <strong>[Perdana Putra Oei] & [Venesa Lim]</strong></div>
+<small class="muted">Terima kasih telah menjadi bagian dari hari bahagia kami.</small>
+</footer>
+
+
+<script>
+// ====== KONFIGURASI CEPAT ======
+// Ubah variabel ini sesuai kebutuhan Anda
+const config = {
+title: 'Undangan Nikah Virtual – Budi & Sari',
+couple: 'Budi & Sari',
+date: '2025-10-25', // Format: YYYY-MM-DD
+timeStart: '10:00', // Jam mulai (WIB/UTC+7)
+timeEnd: '11:00',
+timezone: '+07:00', // Offset, mis. '+07:00'
+platform: 'YouTube Live',
+liveUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+passcode: 'NIKAH2025',
+contactEmail: 'panitia@contoh.com',
+siteUrl: window.location.href
+};
+// ====== Helper format tanggal Indonesia ======
+const hari = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+function fmtTanggal(d){
+const h = hari[d.getDay()];
+const t = d.getDate();
+const b = bulan[d.getMonth()];
+const y = d.getFullYear();
+return `${h}, ${t} ${b} ${y}`;
+}
+
+
+// ====== Set judul & teks tanggal ======
+document.title = config.title;
+const startISO = `${config.date}T${config.timeStart}:00${config.timezone}`;
+const endISO = `${config.date}T${config.timeEnd}:00${config.timezone}`;
+
+
+const startDateLocal = new Date(startISO);
+const endDateLocal = new Date(endISO);
+
+
+document.getElementById('dateText').textContent = fmtTanggal(startDateLocal);
+document.getElementById('timeText').textContent = `${config.timeStart} WIB (UTC${config.timezone})`;
+document.getElementById('dateDetail').textContent = fmtTanggal(startDateLocal);
+document.getElementById('timeDetail').textContent = `${config.timeStart} – ${config.timeEnd} WIB`;
+document.getElementById('dateDetail2').textContent = fmtTanggal(startDateLocal);
+document.getElementById('timeDetail2').textContent = `19:00 – 20:00 WIB`;
+document.getElementById('platform').textContent = config.platform;
+document.getElementById('passcode').textContent = config.passcode;
+// ====== Countdown ======
+function updateCountdown(){
+const now = new Date();
+const diff = new Date(startISO) - now;
+if(diff <= 0){
+document.getElementById('countdown').innerHTML = '<div class="box"><div class="mono">Sedang Berlangsung</div></div>';
+return;
+}
+const s = Math.floor(diff/1000);
+const d = Math.floor(s/86400);
+const h = Math.floor((s%86400)/3600);
+const m = Math.floor((s%3600)/60);
+const ss= Math.floor(s%60);
+document.getElementById('d').textContent = String(d).padStart(2,'0');
+document.getElementById('h').textContent = String(h).padStart(2,'0');
+document.getElementById('m').textContent = String(m).padStart(2,'0');
+document.getElementById('s').textContent = String(ss).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+
+// ====== Add to Calendar (ICS) ======
+function icsEscape(s){ return s.replace(/\n/g,'\\n'); }
+const dtStart = config.date.replaceAll('-','') + 'T' + config.timeStart.replace(':','') + '00';
+const dtEnd = config.date.replaceAll('-','') + 'T' + config.timeEnd.replace(':','') + '00';
+const ics = `BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//Undangan Virtual//ID//EN\nBEGIN:VEVENT\nUID:${Date.now()}@undangan\nDTSTAMP:${dtStart}Z\nDTSTART:${dtStart}Z\nDTEND:${dtEnd}Z\nSUMMARY:${icsEscape('Pernikahan ' + config.couple)}\nDESCRIPTION:${icsEscape('Live streaming: ' + config.liveUrl)}\nURL:${config.siteUrl}\nEND:VEVENT\nEND:VCALENDAR`;
+const blob = new Blob([ics], {type:'text/calendar'});
+const icsUrl = URL.createObjectURL(blob);
+const btnCal = document.getElementById('btnCalendar');
+btnCal.href = icsUrl; btnCal.download = `Undangan-${config.couple.replace(/\s+/g,'-')}.ics`;
+
+
+// ====== Live buttons ======
+document.getElementById('btnLive').href = config.liveUrl;
+document.getElementById('liveMain').href = config.liveUrl;
+
+
+// ====== Copy invitation link ======
+document.getElementById('btnCopy').addEventListener('click', async () => {
+try {
+await navigator.clipboard.writeText(config.siteUrl);
+toast('Tautan undangan telah disalin.');
+} catch(e){
+alert('Gagal menyalin tautan');
+}
+});
+
+
+// ====== Copy rekening buttons ======
+document.querySelectorAll('[data-copy]').forEach(btn => {
+btn.addEventListener('click', async () => {
+const sel = btn.getAttribute('data-copy');
+const val = document.querySelector(sel)?.textContent?.trim();
+try { await navigator.clipboard.writeText(val); toast('Disalin: ' + val); }
+catch { alert('Gagal menyalin'); }
+});
+});
+// ====== RSVP mailto compose ======
+document.getElementById('formRSVP').addEventListener('submit', (e) => {
+e.preventDefault();
+const fd = new FormData(e.currentTarget);
+const data = Object.fromEntries(fd.entries());
+const subject = encodeURIComponent(`[RSVP] ${config.couple} – ${data.nama}`);
+const body = encodeURIComponent(
+`Nama: ${data.nama}\nEmail: ${data.email}\nWhatsApp: ${data.wa||'-'}\nStatus: ${data.status}\nPesan: ${data.pesan||'-'}\n\nTerima kasih.`
+);
+window.location.href = `mailto:${config.contactEmail}?subject=${subject}&body=${body}`;
+});
+
+
+// ====== Mini toast ======
+function toast(msg){
+const t = document.createElement('div');
+t.textContent = msg;
+t.style.cssText = 'position:fixed; left:50%; transform:translateX(-50%); bottom:24px; background:rgba(15,15,25,.9); color:white; padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,.12); z-index:9999; box-shadow: var(--shadow)';
+document.body.appendChild(t);
+setTimeout(()=>{ t.remove(); }, 2000);
+}
+
+
+// ====== Basic input styles ======
+document.querySelectorAll('.input').forEach(el => {
+el.style.padding = '12px 14px';
+el.style.background = 'rgba(255,255,255,.06)';
+el.style.border = '1px solid rgba(255,255,255,.12)';
+el.style.borderRadius = '12px';
+el.style.color = 'var(--text)';
+el.style.outline = 'none';
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // ===== cari elemen =====
+  const form = document.getElementById('formKomentar');
   const clearBtn = document.getElementById('clearBtn');
+  const musicBtn = document.getElementById('musicControl');
+  const bgm = document.getElementById('bgm');
+  const musicStatus = document.getElementById('musicStatus');
 
-  function escapeHtml(s){
-    return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-  }
-  function loadKomentar(){
-    try{
-      const raw = localStorage.getItem(STORAGE_KEY);
-      return raw ? JSON.parse(raw) : [];
-    }catch{ return [] }
-  }
-  function saveKomentar(arr){
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
-  }
-  function waktuIndo(ts){
-    const d = new Date(ts);
-    return d.toLocaleString('id-ID',{dateStyle:'medium', timeStyle:'short'});
-  }
-  function renderKomentar(){
-    const data = loadKomentar().sort((a,b)=>b.ts-a.ts);
-    listEl.innerHTML = "";
-    if(!data.length){ emptyEl.style.display='block'; return }
-    emptyEl.style.display='none';
-    for(const item of data){
-      const card = document.createElement('div');
-      card.className = 'comment';
-      card.innerHTML = `
-        <div style="display:flex;gap:10px;align-items:flex-start">
-          <div style="width:40px;height:40px;border-radius:12px;background:#1b160e;border:1px solid #2d2317;display:flex;align-items:center;justify-content:center;font-weight:700">
-            ${escapeHtml((item.nama||'?').trim().slice(0,1).toUpperCase())}
-          </div>
-          <div style="flex:1;min-width:0">
-            <div style="font-weight:700">${escapeHtml(item.nama||'Tamu')}</div>
-            ${item.kontak ? `<div class="meta">${escapeHtml(item.kontak)}</div>` : ``}
-            <div style="margin-top:6px">${escapeHtml(item.pesan)}</div>
-            <div class="meta">${waktuIndo(item.ts)}</div>
-          </div>
-        </div>`;
-      listEl.appendChild(card);
-    }
-  }
-
-  document.getElementById('formKomentar').addEventListener('submit', (e)=>{
-    e.preventDefault();
-    const fd = new FormData(e.target);
-    const nama = (fd.get('nama')||'').toString().trim();
-    const kontak = (fd.get('kontak')||'').toString().trim();
-    const pesan = (fd.get('pesan')||'').toString().trim();
-    if(!nama || !pesan){ alert('Nama dan pesan wajib diisi.'); return }
-    if(pesan.length > 500){ alert('Pesan maksimal 500 karakter.'); return }
-
-    const data = loadKomentar();
-    data.push({ id: Date.now().toString(36), ts: Date.now(), nama, kontak, pesan });
-    saveKomentar(data);
-    e.target.reset();
-    renderKomentar();
-    // Scroll ke komentar teratas
-    document.getElementById('komentar').scrollIntoView({behavior:'smooth', block:'start'});
-  });
-
-  clearBtn.addEventListener('click',()=>{
-    if(confirm('Hapus semua komentar yang tersimpan di perangkat ini?')) {
-      localStorage.removeItem(STORAGE_KEY);
-      renderKomentar();
-    }
-  });
-
-  // ================================
-  // START
-  // ================================
-  window.addEventListener('load', ()=>{
-    // Peta Pemberkatan
-    buatPeta({
-      elId:'mapPemberkatan',
-      lat: LOKASI.pemberkatan.lat,
-      lng: LOKASI.pemberkatan.lng,
-      title: LOKASI.pemberkatan.nama,
-      alamat: LOKASI.pemberkatan.alamat
+  // ===== pasang listener hanya kalau elemennya ada =====
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // ... logic submit kamu di sini ...
     });
-    updateBtnGoogleMaps(
-      document.getElementById('gmPemberkatan'),
-      LOKASI.pemberkatan.lat, LOKASI.pemberkatan.lng, 'Pemberkatan'
-    );
+  }
 
-    // Peta Resepsi
-    buatPeta({
-      elId:'mapResepsi',
-      lat: LOKASI.resepsi.lat,
-      lng: LOKASI.resepsi.lng,
-      title: LOKASI.resepsi.nama,
-      alamat: LOKASI.resepsi.alamat
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      if (confirm('Hapus semua komentar di perangkat ini?')) {
+        localStorage.removeItem('undangan:komentar:v1');
+        renderKomentar?.();
+      }
     });
-    updateBtnGoogleMaps(
-      document.getElementById('gmResepsi'),
-      LOKASI.resepsi.lat, LOKASI.resepsi.lng, 'Resepsi'
-    );
+  }
 
-    // Komentar
-    renderKomentar();
-  });
-  </script>
+  // Musik (opsional)
+  if (musicBtn && bgm && musicStatus) {
+    musicBtn.addEventListener('click', () => {
+      if (bgm.paused) { bgm.play(); musicStatus.textContent = 'On'; }
+      else { bgm.pause(); musicStatus.textContent = 'Off'; }
+    });
+
+    // auto-play butuh interaksi, coba sekali saat click pertama di dokumen
+    document.addEventListener('click', () => { bgm.play().catch(()=>{}); }, { once:true });
+  }
+});
+</script>
 </body>
 </html>
